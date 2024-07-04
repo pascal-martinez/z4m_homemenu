@@ -2,7 +2,7 @@
 The **z4m_homemenu** displays a dynamic 2 levels menu on the home view according
 to the rights granted to the logged in user.
 
-![Screenshot of the Home Menu view provided by the ZnetDK 4 Mobile 'z4m_homemenu' module](https://mobile.znetdk.fr/applications/default/public/images/modules/z4m_homemenu/screenshot.png?v1.0)
+![Screenshot of the Home Menu view provided by the ZnetDK 4 Mobile 'z4m_homemenu' module](https://mobile.znetdk.fr/applications/default/public/images/modules/z4m_homemenu/screenshot.png?v1.1)
 ## LICENCE
 This module is published under the version 3 of GPL General Public Licence.
 
