@@ -35,6 +35,13 @@ define('MOD_Z4M_HOMEMENU_MAX_PANELS_PER_ROW', 4);
 define('MOD_Z4M_HOMEMENU_PANEL_ICON_WIDTH', '100px');
 
 /**
+ * Name of the view to exclude from the home menu.
+ * @var string Name of the view. If NULL, 'z4m_homemenu' is the exclude view
+ * name.
+ */
+define('MOD_Z4M_HOMEMENU_EXCLUDED_VIEW', NULL);
+
+/**
  * Module version number
  * @var string Version
  */

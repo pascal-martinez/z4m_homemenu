@@ -18,8 +18,8 @@
  * --------------------------------------------------------------------
  * ZnetDK 4 Mobile Home Menu module view
  *
- * File version: 1.1
- * Last update: 07/04/2024
+ * File version: 1.2
+ * Last update: 08/02/2024
  */
 $maxPanelsPerRow = MOD_Z4M_HOMEMENU_MAX_PANELS_PER_ROW;
 $menulogoWidth = MOD_Z4M_HOMEMENU_PANEL_ICON_WIDTH;
@@ -33,7 +33,8 @@ for ($colIdx = 1; $colIdx <= 4; $colIdx++) {
     $colDefCss[$colIdx] = "m{$mCols} l{$lCols}";
 }
 // This view name
-$currentViewName = basename(__FILE__, '.php');
+$currentViewName = MOD_Z4M_HOMEMENU_EXCLUDED_VIEW === NULL 
+        ? basename(__FILE__, '.php') : MOD_Z4M_HOMEMENU_EXCLUDED_VIEW;
 // Check configured value for the max number of panels per row
 if ($maxPanelsPerRow < 1 || $maxPanelsPerRow > 4) {
     General::writeErrorLog($currentViewName, "Value '{$maxPanelsPerRow}' set for the number of max panels per row is invalid. Expected values are 1 to 4.");
