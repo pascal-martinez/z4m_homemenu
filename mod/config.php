@@ -18,8 +18,8 @@
  * --------------------------------------------------------------------
  * Parameters of the ZnetDK 4 Mobile Home Menu module
  *
- * File version: 1.1
- * Last update: 07/04/2024
+ * File version: 1.2
+ * Last update: 10/20/2024
  */
 
 /**
@@ -42,12 +42,28 @@ define('MOD_Z4M_HOMEMENU_PANEL_ICON_WIDTH', '100px');
 define('MOD_Z4M_HOMEMENU_EXCLUDED_VIEW', NULL);
 
 /**
+ * Color scheme of the home menu.
+ * @var array|NULL Colors used to display the home menu. The expected array keys
+ * are 'banner', 'content', 'btn_action' and 'btn_hover'.
+ * If NULL, the color CSS classes applied are: 'w3-theme-d2' for 'banner', 
+ * 'w3-theme-light' for 'content', 'w3-theme-action' for 'btn_action' and 
+ * 'w3-hover-theme' for 'btn_hover'.
+ * Example: [
+ *   'banner' => 'w3-theme-d1',
+ *   'content' => 'w3-theme-light',
+ *   'btn_action' => 'w3-theme-action',
+ *   'btn_hover' => 'w3-hover-theme'
+ * ] 
+ */
+define('MOD_Z4M_HOMEMENU_COLOR_SCHEME', NULL);
+
+/**
  * Module version number
  * @var string Version
  */
-define('MOD_Z4M_HOMEMENU_VERSION_NUMBER','1.1');
+define('MOD_Z4M_HOMEMENU_VERSION_NUMBER','1.3');
 /**
  * Module version date
  * @var string Date in W3C format
  */
-define('MOD_Z4M_HOMEMENU_VERSION_DATE','2024-07-04');
+define('MOD_Z4M_HOMEMENU_VERSION_DATE','2024-10-20');

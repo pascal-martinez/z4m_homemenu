@@ -18,8 +18,8 @@
  * --------------------------------------------------------------------
  * ZnetDK 4 Mobile Home Menu module view
  *
- * File version: 1.2
- * Last update: 08/02/2024
+ * File version: 1.3
+ * Last update: 10/20/2024
  */
 $maxPanelsPerRow = MOD_Z4M_HOMEMENU_MAX_PANELS_PER_ROW;
 $menulogoWidth = MOD_Z4M_HOMEMENU_PANEL_ICON_WIDTH;
@@ -62,6 +62,17 @@ if ($allowedMenus === FALSE
     $colClasses = $colDefCss[$colDefApplied];
     $colMedium = $colCountMedium[$colDefApplied];
 }
+$color = [
+    'banner' => 'w3-theme-d2',
+    'content' => 'w3-theme-light',
+    'btn_action' => 'w3-theme-action',
+    'btn_hover' => 'w3-hover-theme'
+];
+if (is_array(MOD_Z4M_HOMEMENU_COLOR_SCHEME)) {
+    $color = MOD_Z4M_HOMEMENU_COLOR_SCHEME;
+} elseif (defined('CFG_MOBILE_W3CSS_THEME_COLOR_SCHEME')) {
+    $color = CFG_MOBILE_W3CSS_THEME_COLOR_SCHEME;
+}
 ?>
 <style>
     #z4m-home-menu .level1-logo {
@@ -74,6 +85,9 @@ if ($allowedMenus === FALSE
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
+    #z4m-home-menu a.level2-anchor:focus {
+        outline: auto;
     }
 </style>
 <div id="z4m-home-menu"<?php echo $l1MenuCount < 3 ? ' class="w3-content"' : ''; ?>>
@@ -94,16 +108,16 @@ foreach ($allMenuItems as $key => $menuDef) :
     <div class="menu-row w3-row-padding w3-center w3-stretch">
 <?php endif; ?>
         <div class="menu-col w3-col <?php echo $colClasses; ?> w3-section">
-            <div class="w3-padding-32 w3-theme-d1">
+            <div class="w3-padding-32 <?php echo $color['banner']; ?>">
                 <i class="level1-logo fa <?php echo $menuDef[3]; ?> w3-margin"></i>
                 <div class="w3-xxlarge"><?php echo $menuDef[1]; ?></div>
             </div>
-            <div class="horizontal-divider w3-theme"></div>
-            <div class="w3-bar-block w3-xlarge w3-theme-action">
+            <div class="horizontal-divider <?php echo $color['content']; ?>"></div>
+            <div class="w3-bar-block w3-xlarge <?php echo $color['btn_action']; ?>">
 <?php
     $subItems = is_array($menuDef[2]) ? $menuDef[2] : [$menuDef];
     foreach ($subItems as $menuItem) : ?>
-            <a onclick="znetdkMobile.content.displayView('<?php echo $menuItem[0]; ?>');" class="level2-anchor w3-bar-item w3-button w3-hover-theme"><i class="fa <?php echo $menuItem[3]; ?>"></i>&nbsp;<?php echo $menuItem[1]; ?></a>
+            <a href="javascript:void(0)" onclick="znetdkMobile.content.displayView('<?php echo $menuItem[0]; ?>');" class="level2-anchor w3-bar-item w3-button <?php echo $color['btn_hover']; ?>"><i class="fa <?php echo $menuItem[3]; ?>"></i>&nbsp;<?php echo $menuItem[1]; ?></a>
 <?php endforeach;
 for ($index = 0; $index < $maxAnchorsPerLargeRow - count($subItems); $index++) : ?>
             <div class="w3-bar-item w3-hide-medium w3-hide-small">&nbsp;</div>

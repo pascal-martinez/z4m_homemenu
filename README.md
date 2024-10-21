@@ -32,6 +32,13 @@ For example:
 \MenuManager::addMenuItem(NULL, 'z4m_homemenu', 'Home', 'fa-home');
 ```
 
+## CUSTOMIZATION
+The home menu can be customized by settings the following PHP constants in the [`config.php`](/../../../znetdk4mobile/blob/master/applications/default/app/config.php) script of the application:
+- `MOD_Z4M_HOMEMENU_MAX_PANELS_PER_ROW`: the maximum number of panels displayed per row (value `4` by default).
+- `MOD_Z4M_HOMEMENU_PANEL_ICON_WIDTH`: the width of the menu item icons displayed in each menu panel (value `'100px'`).
+- `MOD_Z4M_HOMEMENU_EXCLUDED_VIEW`: name of the view to exclude from the home menu (value `'z4m_homemenu'` by default).
+- `MOD_Z4M_HOMEMENU_COLOR_SCHEME`: color scheme of the home menu. The color CSS classes applied by default are: `'w3-theme-d2'` for `'banner'`, `'w3-theme-light'` for `'content'`, `'w3-theme-action'` for `'btn_action'` and `'w3-hover-theme'` for `'btn_hover'`.
+
 ## CHANGE LOG
 See [CHANGELOG.md](CHANGELOG.md) file.
 
