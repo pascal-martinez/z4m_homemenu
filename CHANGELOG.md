@@ -1,5 +1,8 @@
 # CHANGE LOG: Home Menu (z4m_homemenu)
 
+## Version 1.4, 2025-01-03
+- BUG FIXING: submenu items for which the user does not have permission were displayed instead of being masked.
+
 ## Version 1.3, 2024-10-20
 - CHANGE: MOD_Z4M_HOMEMENU_COLOR_SCHEME PHP constant to customize the colors of
   the home menu.

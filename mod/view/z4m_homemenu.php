@@ -18,8 +18,8 @@
  * --------------------------------------------------------------------
  * ZnetDK 4 Mobile Home Menu module view
  *
- * File version: 1.3
- * Last update: 10/20/2024
+ * File version: 1.4
+ * Last update: 01/03/2025
  */
 $maxPanelsPerRow = MOD_Z4M_HOMEMENU_MAX_PANELS_PER_ROW;
 $menulogoWidth = MOD_Z4M_HOMEMENU_PANEL_ICON_WIDTH;
@@ -116,10 +116,15 @@ foreach ($allMenuItems as $key => $menuDef) :
             <div class="w3-bar-block w3-xlarge <?php echo $color['btn_action']; ?>">
 <?php
     $subItems = is_array($menuDef[2]) ? $menuDef[2] : [$menuDef];
-    foreach ($subItems as $menuItem) : ?>
+    $notAllowedSubItems = 0;
+    foreach ($subItems as $menuItem) :
+        if (is_array($allowedMenus) && !in_array($menuItem[0], $allowedMenus)) {
+            $notAllowedSubItems++;
+            continue;
+        } ?>
             <a href="javascript:void(0)" onclick="znetdkMobile.content.displayView('<?php echo $menuItem[0]; ?>');" class="level2-anchor w3-bar-item w3-button <?php echo $color['btn_hover']; ?>"><i class="fa <?php echo $menuItem[3]; ?>"></i>&nbsp;<?php echo $menuItem[1]; ?></a>
 <?php endforeach;
-for ($index = 0; $index < $maxAnchorsPerLargeRow - count($subItems); $index++) : ?>
+for ($index = 0; $index < $maxAnchorsPerLargeRow - count($subItems) + $notAllowedSubItems; $index++) : ?>
             <div class="w3-bar-item w3-hide-medium w3-hide-small">&nbsp;</div>
 <?php endfor;
 if ($panelNbr%$colMedium === 0) {

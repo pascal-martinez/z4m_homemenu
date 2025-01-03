@@ -18,8 +18,8 @@
  * --------------------------------------------------------------------
  * Parameters of the ZnetDK 4 Mobile Home Menu module
  *
- * File version: 1.2
- * Last update: 10/20/2024
+ * File version: 1.3
+ * Last update: 01/03/2025
  */
 
 /**
@@ -61,9 +61,9 @@ define('MOD_Z4M_HOMEMENU_COLOR_SCHEME', NULL);
  * Module version number
  * @var string Version
  */
-define('MOD_Z4M_HOMEMENU_VERSION_NUMBER','1.3');
+define('MOD_Z4M_HOMEMENU_VERSION_NUMBER','1.4');
 /**
  * Module version date
  * @var string Date in W3C format
  */
-define('MOD_Z4M_HOMEMENU_VERSION_DATE','2024-10-20');
+define('MOD_Z4M_HOMEMENU_VERSION_DATE','2025-01-03');
