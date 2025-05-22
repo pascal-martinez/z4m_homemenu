@@ -16,127 +16,97 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  * --------------------------------------------------------------------
- * ZnetDK 4 Mobile Home Menu module view
+ * ZnetDK 4 Mobile Home Menu module view fragment
  *
- * File version: 1.4
- * Last update: 01/03/2025
+ * File version: 1.5
+ * Last update: 05/19/2025
  */
-$maxPanelsPerRow = MOD_Z4M_HOMEMENU_MAX_PANELS_PER_ROW;
-$menulogoWidth = MOD_Z4M_HOMEMENU_PANEL_ICON_WIDTH;
-// Column definition for medium and large screens
-$colDefCss = [];
-$colCountMedium = [];
-for ($colIdx = 1; $colIdx <= 4; $colIdx++) {
-    $colCountMedium[$colIdx] = (($colIdx-1)%2)+1;
-    $mCols = 12/$colCountMedium[$colIdx];
-    $lCols = 12/$colIdx;
-    $colDefCss[$colIdx] = "m{$mCols} l{$lCols}";
-}
-// This view name
-$currentViewName = MOD_Z4M_HOMEMENU_EXCLUDED_VIEW === NULL 
-        ? basename(__FILE__, '.php') : MOD_Z4M_HOMEMENU_EXCLUDED_VIEW;
-// Check configured value for the max number of panels per row
-if ($maxPanelsPerRow < 1 || $maxPanelsPerRow > 4) {
-    General::writeErrorLog($currentViewName, "Value '{$maxPanelsPerRow}' set for the number of max panels per row is invalid. Expected values are 1 to 4.");
-    $maxPanelsPerRow = 2;
-}
-// Count the number of Level 1 and Level 2 menu items 
-$allowedMenus = MenuManager::getAllowedMenuItems();
-$allMenuItems = [];
-if ($allowedMenus === FALSE
-        || (is_array($allowedMenus) && count($allowedMenus) < 2)) {
-    // No menu to display
-} else {
-    $allMenuItems = MenuManager::getMenuItems();
-    $l1MenuCount = 0;
-    $l2MenuCount = [];
-    foreach ($allMenuItems as $key => $menuDef) { // Level 1 Menu count calculation
-        if ($menuDef[0] === $currentViewName ||
-                (is_array($allowedMenus) && !in_array($menuDef[0], $allowedMenus))) {
-            continue; // Home view is excluded or menu item not allowed
-        }
-        $l1MenuCount++;
-        $l2MenuCount[] = $subItems = is_array($menuDef[2]) ? count($menuDef[2]) : 1;
-    }
-    $colDefApplied = $l1MenuCount > $maxPanelsPerRow ? $maxPanelsPerRow : $l1MenuCount;
-    $colClasses = $colDefCss[$colDefApplied];
-    $colMedium = $colCountMedium[$colDefApplied];
-}
+
+/* Color Scheme */
 $color = [
     'banner' => 'w3-theme-d2',
     'content' => 'w3-theme-light',
     'btn_action' => 'w3-theme-action',
-    'btn_hover' => 'w3-hover-theme'
+    'btn_hover' => 'w3-hover-theme',
+    'nav_menu_bar_select' => 'w3-border-theme'
 ];
 if (is_array(MOD_Z4M_HOMEMENU_COLOR_SCHEME)) {
     $color = MOD_Z4M_HOMEMENU_COLOR_SCHEME;
 } elseif (defined('CFG_MOBILE_W3CSS_THEME_COLOR_SCHEME')) {
     $color = CFG_MOBILE_W3CSS_THEME_COLOR_SCHEME;
 }
+// Home menu definition
+$homeMenu = new z4m_homemenu\mod\HomeMenu();
+// Calculation of the font size viewport factor 
+$panelTitleViewWidth = 4 - $homeMenu->getPanelCountPerRow() + (($homeMenu->getPanelCountPerRow()-1)/2);
+$menuTitleViewWidth = 4 - $homeMenu->getPanelCountPerRow() 
+        + (($homeMenu->getPanelCountPerRow()-1)/2.5) - ((4 - $homeMenu->getPanelCountPerRow())*0.2);
 ?>
 <style>
-    #z4m-home-menu .level1-logo {
-        font-size: <?php echo $menulogoWidth; ?>;
+    #z4m-home-menu .level1 .logo {
+        font-size: <?php echo $homeMenu->getPanelIconWidth(); ?>;
+    }
+    #z4m-home-menu .level1 .missing-logo {
+        width: <?php echo $homeMenu->getPanelIconWidth(); ?>;
+        height: <?php echo $homeMenu->getPanelIconWidth(); ?>;
+    }
+    #z4m-home-menu .level1 .title {
+        font-size: 36px;
+    }
+    #z4m-home-menu .level2 {
+        font-size: 24px;
+    }
+    @media (min-width:993px){
+        #z4m-home-menu .level1 .title {
+            font-size: clamp(16px, <?php echo $panelTitleViewWidth; ?>vw, 36px);
+        }
+        #z4m-home-menu .level2 {
+            font-size: clamp(14px, <?php echo $menuTitleViewWidth; ?>vw, 24px);
+        }
     }
     #z4m-home-menu .horizontal-divider {
         height: 2px;
     }
-    #z4m-home-menu .level2-anchor {
+    #z4m-home-menu .level1 .title,
+    #z4m-home-menu .level2 .anchor {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-    #z4m-home-menu a.level2-anchor:focus {
+    #z4m-home-menu level2 .anchor:focus {
         outline: auto;
     }
 </style>
-<div id="z4m-home-menu"<?php echo $l1MenuCount < 3 ? ' class="w3-content"' : ''; ?>>
 <?php
-$panelNbr = 0;
-foreach ($allMenuItems as $key => $menuDef) :
-    if ($menuDef[0] === $currentViewName ||
-            (is_array($allowedMenus) && !in_array($menuDef[0], $allowedMenus))) {
-        continue; // Home view is excluded or menu item not allowed
-    }
-    $isNewRow = $panelNbr%$maxPanelsPerRow === 0;
-    if ($isNewRow && $panelNbr > 0) : ?>
-    </div>
-<?php endif;
-    if ($isNewRow) : 
-        $maxAnchorsPerLargeRow = max(array_slice($l2MenuCount, $panelNbr, $colDefApplied));
-    ?>
-    <div class="menu-row w3-row-padding w3-center w3-stretch">
-<?php endif; ?>
-        <div class="menu-col w3-col <?php echo $colClasses; ?> w3-section">
-            <div class="w3-padding-32 <?php echo $color['banner']; ?>">
-                <i class="level1-logo fa <?php echo $menuDef[3]; ?> w3-margin"></i>
-                <div class="w3-xxlarge"><?php echo $menuDef[1]; ?></div>
-            </div>
-            <div class="horizontal-divider <?php echo $color['content']; ?>"></div>
-            <div class="w3-bar-block w3-xlarge <?php echo $color['btn_action']; ?>">
-<?php
-    $subItems = is_array($menuDef[2]) ? $menuDef[2] : [$menuDef];
-    $notAllowedSubItems = 0;
-    foreach ($subItems as $menuItem) :
-        if (is_array($allowedMenus) && !in_array($menuItem[0], $allowedMenus)) {
-            $notAllowedSubItems++;
-            continue;
-        } ?>
-            <a href="javascript:void(0)" onclick="znetdkMobile.content.displayView('<?php echo $menuItem[0]; ?>');" class="level2-anchor w3-bar-item w3-button <?php echo $color['btn_hover']; ?>"><i class="fa <?php echo $menuItem[3]; ?>"></i>&nbsp;<?php echo $menuItem[1]; ?></a>
-<?php endforeach;
-for ($index = 0; $index < $maxAnchorsPerLargeRow - count($subItems) + $notAllowedSubItems; $index++) : ?>
-            <div class="w3-bar-item w3-hide-medium w3-hide-small">&nbsp;</div>
-<?php endfor;
-if ($panelNbr%$colMedium === 0) {
-    $maxAnchorsPerMediumRow = max(array_slice($l2MenuCount, $panelNbr, $colMedium));
-}
-for ($index = 0; $index < $maxAnchorsPerMediumRow - count($subItems); $index++) : ?>
-            <div class="w3-bar-item w3-hide-large w3-hide-small">&nbsp;</div>
-<?php endfor;
-        $panelNbr++;
-?>
-            </div>
+/* Monitoring boxes display if defined */
+if ($homeMenu->areMonitoringBoxesToBeShown()) : ?>
+<div class="w3-row-padding w3-stretch">
+    <div class="w3-col s12 m12 l3 w3-margin-top">
+        <div class=" w3-padding w3-large <?php echo $color['banner']; ?>">
+            <i class="fa fa-flag"></i>
+            <?php echo MOD_Z4M_HOMEMENU_MONITORING_TITLE; ?>
+            <a id="z4m_homemenu-refresh" class="w3-right" href="#">
+                <i class="fa fa-refresh" title="<?php echo MOD_Z4M_HOMEMENU_MONITORING_REFRESH_TITLE; ?>"></i>
+            </a>
         </div>
-<?php endforeach; ?>
+<?php
+$monitoringBoxPaths = $homeMenu->getMonitoringBoxPaths();
+foreach ($monitoringBoxPaths as $boxPath) {
+    require $boxPath;
+}
+?>
+    </div>
+    <div class="w3-col s12 m12 l9">
+<?php require 'fragment/homemenu.php'; ?>
     </div>
 </div>
+<script>
+(function(){
+    $('#z4m_homemenu-refresh').on('click.z4m_homemenu', function(e) {
+        e.preventDefault();
+        z4m.content.reloadView(z4m.content.getDisplayedViewId());
+    });
+})();
+</script>
+<?php else : require 'fragment/homemenu.php';
+endif;

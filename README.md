@@ -38,6 +38,29 @@ The home menu can be customized by settings the following PHP constants in the [
 - `MOD_Z4M_HOMEMENU_PANEL_ICON_WIDTH`: the width of the menu item icons displayed in each menu panel (value `'100px'`).
 - `MOD_Z4M_HOMEMENU_EXCLUDED_VIEW`: name of the view to exclude from the home menu (value `'z4m_homemenu'` by default).
 - `MOD_Z4M_HOMEMENU_COLOR_SCHEME`: color scheme of the home menu. The color CSS classes applied by default are: `'w3-theme-d2'` for `'banner'`, `'w3-theme-light'` for `'content'`, `'w3-theme-action'` for `'btn_action'` and `'w3-hover-theme'` for `'btn_hover'`.
+- `MOD_Z4M_HOMEMENU_MONITORING_BOXES`: since **version 1.5** of the module, the paths of the monitoring boxes php scripts to show on the home page (see chapter below for precisions).
+
+## DISPLAYING MONITORING BOXES ON THE HOME MENU
+Since **version 1.5** of the **z4m_homemenu** module, **monitoring boxes** can be displayed on the home menu as shown on the screenshot below.
+
+![Screenshot of the Home Menu Monitoring boxes](https://mobile.znetdk.fr/applications/default/public/images/modules/z4m_homemenu/screenshot2.png?v1.1)
+
+A box is displayed by calling the PHP script whose path was configured via the `MOD_Z4M_HOMEMENU_MONITORING_BOXES` constant.  
+A monitoring box template named [`box_sample.php`](mod/view/fragment/box_sample.php) is provided as an example.  
+In addition, visibility of the boxes can be restricted to users having a given user profile.  
+Here is below an example of configuration for displaying multiple monitoring boxes.  
+```php
+define('MOD_Z4M_HOMEMENU_MONITORING_BOXES', [
+    ['boxPath' => 'z4m_storage/mod/view/fragment/homemenu_storage.php'],
+    ['boxPath' => 'z4m_smssending/mod/view/fragment/homemenu_credit_balance.php']
+]);
+```
+To display the `box_sample.php` box only for users having the "Manager" user profile, the configuration is shown below:  
+```php
+define('MOD_Z4M_HOMEMENU_MONITORING_BOXES', [
+    ['boxPath' => 'z4m_homemenu/mod/view/fragment/box_sample.php', 'userProfile' => 'Manager']
+]);
+```
 
 ## CHANGE LOG
 See [CHANGELOG.md](CHANGELOG.md) file.

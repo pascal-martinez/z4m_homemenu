@@ -1,5 +1,10 @@
 # CHANGE LOG: Home Menu (z4m_homemenu)
 
+## Version 1.5, 2025-05-22
+- CHANGE: new monitoring panel added to the home page if the MOD_Z4M_HOMEMENU_MONITORING_BOXES constant is configured.
+- BUG FIXING: when no icon were defined for a level 1 menu item, its panel height were lower than the others panels displayed with an icon.
+- BUG FIXING: too long level 1 menu item labels were displayed on multiple lines, so its panel height were higher than the others panels.
+
 ## Version 1.4, 2025-01-03
 - BUG FIXING: submenu items for which the user does not have permission were displayed instead of being masked.
 

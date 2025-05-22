@@ -18,8 +18,8 @@
  * --------------------------------------------------------------------
  * Parameters of the ZnetDK 4 Mobile Home Menu module
  *
- * File version: 1.3
- * Last update: 01/03/2025
+ * File version: 1.4
+ * Last update: 05/17/2025
  */
 
 /**
@@ -42,17 +42,30 @@ define('MOD_Z4M_HOMEMENU_PANEL_ICON_WIDTH', '100px');
 define('MOD_Z4M_HOMEMENU_EXCLUDED_VIEW', NULL);
 
 /**
+ * Monitoring boxes to dispay on the home menu
+ * @var array|NULL Boxes definition. If NULL, no monitoring boxes are displayed.
+ * Example of definition: [
+ * [
+ *    'boxPath' => 'z4m_homemenu/mod/view/fragment/box_sample.php',
+ *    'userProfile' => 'Manager'
+ * ]]
+ */
+define('MOD_Z4M_HOMEMENU_MONITORING_BOXES', NULL);
+
+/**
  * Color scheme of the home menu.
  * @var array|NULL Colors used to display the home menu. The expected array keys
  * are 'banner', 'content', 'btn_action' and 'btn_hover'.
  * If NULL, the color CSS classes applied are: 'w3-theme-d2' for 'banner', 
- * 'w3-theme-light' for 'content', 'w3-theme-action' for 'btn_action' and 
- * 'w3-hover-theme' for 'btn_hover'.
+ * 'w3-theme-light' for 'content', 'w3-theme-action' for 'btn_action', 
+ * 'w3-hover-theme' for 'btn_hover' and 'w3-theme-border' for
+ * 'nav_menu_bar_select'.
  * Example: [
  *   'banner' => 'w3-theme-d1',
  *   'content' => 'w3-theme-light',
  *   'btn_action' => 'w3-theme-action',
- *   'btn_hover' => 'w3-hover-theme'
+ *   'btn_hover' => 'w3-hover-theme',
+ *   'nav_menu_bar_select' => 'w3-border-theme'
  * ] 
  */
 define('MOD_Z4M_HOMEMENU_COLOR_SCHEME', NULL);
@@ -61,9 +74,9 @@ define('MOD_Z4M_HOMEMENU_COLOR_SCHEME', NULL);
  * Module version number
  * @var string Version
  */
-define('MOD_Z4M_HOMEMENU_VERSION_NUMBER','1.4');
+define('MOD_Z4M_HOMEMENU_VERSION_NUMBER','1.5');
 /**
  * Module version date
  * @var string Date in W3C format
  */
-define('MOD_Z4M_HOMEMENU_VERSION_DATE','2025-01-03');
+define('MOD_Z4M_HOMEMENU_VERSION_DATE','2025-05-22');
