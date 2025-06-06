@@ -18,8 +18,8 @@
  * --------------------------------------------------------------------
  * ZnetDK 4 Mobile Home Menu module view fragment
  *
- * File version: 1.5
- * Last update: 05/19/2025
+ * File version: 1.6
+ * Last update: 06/06/2025
  */
 
 /* Color Scheme */
@@ -79,7 +79,7 @@ $menuTitleViewWidth = 4 - $homeMenu->getPanelCountPerRow()
 </style>
 <?php
 /* Monitoring boxes display if defined */
-if ($homeMenu->areMonitoringBoxesToBeShown()) : ?>
+if ($homeMenu->getMonitoringBoxCountToDisplayForLoggedInUser() > 0) : ?>
 <div class="w3-row-padding w3-stretch">
     <div class="w3-col s12 m12 l3 w3-margin-top">
         <div class=" w3-padding w3-large <?php echo $color['banner']; ?>">

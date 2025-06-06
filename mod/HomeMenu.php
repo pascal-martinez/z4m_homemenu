@@ -19,8 +19,8 @@
  * --------------------------------------------------------------------
  * ZnetDK 4 Mobile Home Menu module Manager class
  *
- * File version: 1.0
- * Last update: 05/21/2025
+ * File version: 1.1
+ * Last update: 06/06/2025
  */
 namespace z4m_homemenu\mod;
 
@@ -222,8 +222,20 @@ class HomeMenu {
      * or not
      * @return boolean Value TRUE if monitor boxes are to be displyed.
      */
-    public function areMonitoringBoxesToBeShown() {
+    protected function areMonitoringBoxesToBeShown() {
         return is_array(MOD_Z4M_HOMEMENU_MONITORING_BOXES);
+    }
+    
+    /**
+     * Returns the number of monitoring boxes to display for the logged in user.
+     * @return int Number of monitoring boxes.
+     */
+    public function getMonitoringBoxCountToDisplayForLoggedInUser() {
+        if (!$this->areMonitoringBoxesToBeShown()) {
+            return 0;
+        }
+        $boxPaths = $this->getMonitoringBoxPaths();
+        return count($boxPaths);
     }
 
     /**
@@ -231,8 +243,14 @@ class HomeMenu {
      * @return int Number of panels per row.
      */
     public function getPanelCountPerRow() {
-        return $this->maxPanelsPerRow
-                + ($this->areMonitoringBoxesToBeShown() ? 1 : 0);
+        $countPerRow = $this->getMonitoringBoxCountToDisplayForLoggedInUser() > 0 ? 1 : 0;        
+        if (count($this->displayedMenuItems) === 0) {
+            return $countPerRow;
+        }
+        if (count($this->displayedMenuItems) === 1 && count($this->displayedMenuItems[0]) < $this->maxPanelsPerRow) {
+            return $countPerRow + count($this->displayedMenuItems[0]);
+        }
+        return $countPerRow + $this->maxPanelsPerRow;
     }
 
     /**

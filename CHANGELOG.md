@@ -1,5 +1,11 @@
 # CHANGE LOG: Home Menu (z4m_homemenu)
 
+## Version 1.6, 2025-06-06
+- CHANGE: the monitoring panel is no longer displayed when the MOD_Z4M_HOMEMENU_MONITORING_BOXES constant is configured
+  in case no monitoring boxes should be displayed for the logged in user because they do not have the expected user profile.
+- CHANGE: display optimization when the total number of menu panels to show for the logged in user is lower than the maximum
+  menu panels per row defined via the MOD_Z4M_HOMEMENU_MAX_PANELS_PER_ROW constant.
+
 ## Version 1.5, 2025-05-22
 - CHANGE: new monitoring panel added to the home page if the MOD_Z4M_HOMEMENU_MONITORING_BOXES constant is configured.
 - BUG FIXING: when no icon were defined for a level 1 menu item, its panel height were lower than the others panels displayed with an icon.
