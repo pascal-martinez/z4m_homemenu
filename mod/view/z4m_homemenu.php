@@ -18,8 +18,8 @@
  * --------------------------------------------------------------------
  * ZnetDK 4 Mobile Home Menu module view fragment
  *
- * File version: 1.6
- * Last update: 06/06/2025
+ * File version: 1.7
+ * Last update: 06/14/2025
  */
 
 /* Color Scheme */
@@ -73,7 +73,7 @@ $menuTitleViewWidth = 4 - $homeMenu->getPanelCountPerRow()
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-    #z4m-home-menu level2 .anchor:focus {
+    #z4m-home-menu .level2 .anchor:focus {
         outline: auto;
     }
 </style>

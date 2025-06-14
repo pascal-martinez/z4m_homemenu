@@ -1,5 +1,8 @@
 # CHANGE LOG: Home Menu (z4m_homemenu)
 
+## Version 1.7, 2025-06-14
+- BUG FIXING: the keyboard focus outline was no longer displayed on level 2 menu items.
+
 ## Version 1.6, 2025-06-06
 - CHANGE: the monitoring panel is no longer displayed when the MOD_Z4M_HOMEMENU_MONITORING_BOXES constant is configured
   in case no monitoring boxes should be displayed for the logged in user because they do not have the expected user profile.
