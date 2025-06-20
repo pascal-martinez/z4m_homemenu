@@ -1,5 +1,8 @@
 # CHANGE LOG: Home Menu (z4m_homemenu)
 
+## Version 1.8, 2025-06-20
+- BUG FIXING: the level 2 menu items were not aligned vertically (CSS class `fa-fw` added to the menu icons).
+
 ## Version 1.7, 2025-06-14
 - BUG FIXING: the keyboard focus outline was no longer displayed on level 2 menu items.
 

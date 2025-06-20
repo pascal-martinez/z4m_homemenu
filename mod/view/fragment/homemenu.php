@@ -18,8 +18,8 @@
  * --------------------------------------------------------------------
  * ZnetDK 4 Mobile Home Menu module view
  *
- * File version: 1.0
- * Last update: 05/21/2025
+ * File version: 1.1
+ * Last update: 06/20/2025
  */
 $menuContainerClass = $homeMenu->getPanelCountPerRow() < 3 ? ' class="w3-content"' : '';
 $colClasses = $homeMenu->getColumnDefinitionClasses();
@@ -45,7 +45,7 @@ foreach ($panelRows as $rowPanels) /* ROWS */: ?>
 <?php
         foreach ($panel['menuItems'] as $menuItem) /* MENU ITEMS */ : ?>
             <a href="javascript:void(0)" onclick="znetdkMobile.content.displayView('<?php echo $menuItem['viewName']; ?>');" class="anchor w3-bar-item w3-button <?php echo $color['btn_hover']; ?>">
-                <i class="fa <?php echo $menuItem['icon']; ?>"></i>&nbsp;<?php echo $menuItem['title']; ?>
+                <i class="fa fa-fw <?php echo $menuItem['icon']; ?>"></i>&nbsp;<?php echo $menuItem['title']; ?>
             </a>
 <?php
         endforeach; /* MENU ITEMS */
