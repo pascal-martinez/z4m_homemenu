@@ -1,5 +1,9 @@
 # CHANGE LOG: Home Menu (z4m_homemenu)
 
+## Version 1.9, 2025-07-29
+- BUG FIXING: extra space were displayed under the level 2 menu items when the current logged in user was not allowed
+  to access to all existing menu items defined in the 'menu.php' of the application.
+
 ## Version 1.8, 2025-06-20
 - BUG FIXING: the level 2 menu items were not aligned vertically (CSS class `fa-fw` added to the menu icons).
 

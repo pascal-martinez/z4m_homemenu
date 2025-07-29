@@ -19,8 +19,8 @@
  * --------------------------------------------------------------------
  * ZnetDK 4 Mobile Home Menu module Manager class
  *
- * File version: 1.1
- * Last update: 06/06/2025
+ * File version: 1.2
+ * Last update: 07/29/2025
  */
 namespace z4m_homemenu\mod;
 
@@ -83,9 +83,33 @@ class HomeMenu {
                 continue; // Home view is excluded or menu item not allowed
             }
             $level1MenuCount++;
-            $l2MenuCount[] = is_array($menuDef[2]) ? count($menuDef[2]) : 1;
+            $l2MenuCount[] = $this->calculateLevel2MenuItemCount($menuDef[2], $allowedMenus);
         }
         return [$level1MenuCount, $l2MenuCount];
+    }
+    
+    /**
+     * Calculates de level 2 menu item count.
+     * If level 2 menu items exist, the level 2 menu item count is calculated 
+     * according to the allowed menu items for the current logged in user.
+     * @param array|NULL $level2MenuItems
+     * @param array|NULL $allowedMenus
+     * @return int The level2 menu item count
+     */
+    private function calculateLevel2MenuItemCount($level2MenuItems, $allowedMenus) {
+        if (!is_array($level2MenuItems)) {
+            return 1;
+        }
+        if (!is_array($allowedMenus)) {
+            return count($level2MenuItems);
+        }
+        $count = 0;
+        foreach ($level2MenuItems as $menuDef) {
+            if (in_array($menuDef[0], $allowedMenus)) {
+                $count++;
+            }
+        }
+        return $count;
     }
     
     /**
