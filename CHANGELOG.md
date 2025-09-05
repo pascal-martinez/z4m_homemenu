@@ -1,5 +1,8 @@
 # CHANGE LOG: Home Menu (z4m_homemenu)
 
+## Version 2.0, 2025-09-01
+- BUG FIXING: the outline of the focused menu item is reduced for a better visibility.
+
 ## Version 1.9, 2025-07-29
 - BUG FIXING: extra space were displayed under the level 2 menu items when the current logged in user was not allowed
   to access to all existing menu items defined in the 'menu.php' of the application.
