@@ -1,5 +1,9 @@
 # CHANGE LOG: Home Menu (z4m_homemenu)
 
+## Version 2.1, 2025-10-20
+- BUG FIXING: a monitoring panel was displayed multiple times when the same path
+  was configured multiple times in the MOD_Z4M_HOMEMENU_MONITORING_BOXES constant with different user profiles.
+
 ## Version 2.0, 2025-09-01
 - BUG FIXING: the outline of the focused menu item is reduced for a better visibility.
 

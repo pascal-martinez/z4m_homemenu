@@ -61,6 +61,13 @@ define('MOD_Z4M_HOMEMENU_MONITORING_BOXES', [
     ['boxPath' => 'z4m_homemenu/mod/view/fragment/box_sample.php', 'userProfile' => 'Manager']
 ]);
 ```
+To display the `box_sample.php` box only for users having the "Manager" or "Accounting" user profiles, the configuration is shown below:  
+```php
+define('MOD_Z4M_HOMEMENU_MONITORING_BOXES', [
+    ['boxPath' => 'z4m_homemenu/mod/view/fragment/box_sample.php', 'userProfile' => 'Manager'],
+    ['boxPath' => 'z4m_homemenu/mod/view/fragment/box_sample.php', 'userProfile' => 'Accounting']
+]);
+```
 
 ## CHANGE LOG
 See [CHANGELOG.md](CHANGELOG.md) file.

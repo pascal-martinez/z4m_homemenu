@@ -19,8 +19,8 @@
  * --------------------------------------------------------------------
  * ZnetDK 4 Mobile Home Menu module Manager class
  *
- * File version: 1.2
- * Last update: 07/29/2025
+ * File version: 1.3
+ * Last update: 10/20/2025
  */
 namespace z4m_homemenu\mod;
 
@@ -292,8 +292,9 @@ class HomeMenu {
         $boxPaths = [];
         $monitoringBoxes = MOD_Z4M_HOMEMENU_MONITORING_BOXES;
         foreach ($monitoringBoxes as $boxDef) {
-            if (!key_exists('userProfile', $boxDef) || (is_string($boxDef['userProfile'])
-                    && \UserSession::hasUserProfile($boxDef['userProfile']))) {
+            if (!in_array($boxDef['boxPath'], $boxPaths) && (
+                    !key_exists('userProfile', $boxDef) || (is_string($boxDef['userProfile'])
+                    && \UserSession::hasUserProfile($boxDef['userProfile'])))) {
                 $boxPaths[] = $boxDef['boxPath'];
             }
         }
