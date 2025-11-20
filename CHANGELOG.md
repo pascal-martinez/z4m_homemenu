@@ -1,5 +1,9 @@
 # CHANGE LOG: Home Menu (z4m_homemenu)
 
+## Version 2.2, 2025-11-09
+- BUG FIXING: On medium screen, when the constant MOD_Z4M_HOMEMENU_MAX_PANELS_PER_ROW was set to 4,
+  the menu panels on the same row did not have the same height.
+
 ## Version 2.1, 2025-10-20
 - BUG FIXING: a monitoring panel was displayed multiple times when the same path
   was configured multiple times in the MOD_Z4M_HOMEMENU_MONITORING_BOXES constant with different user profiles.

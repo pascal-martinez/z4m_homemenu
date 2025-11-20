@@ -19,8 +19,8 @@
  * --------------------------------------------------------------------
  * ZnetDK 4 Mobile Home Menu module Manager class
  *
- * File version: 1.3
- * Last update: 10/20/2025
+ * File version: 1.4
+ * Last update: 11/09/2025
  */
 namespace z4m_homemenu\mod;
 
@@ -188,6 +188,9 @@ class HomeMenu {
                 $newRowPanels = [];
                 $maxAnchorsPerLargeRow = max(array_slice($l2MenuCount, $panelNbr, $colDefApplied));
             }
+            if ($panelNbr%$colMedium === 0) {
+                $maxAnchorsPerMediumRow = max(array_slice($l2MenuCount, $panelNbr, $colMedium));
+            }
             $newPanel = ['icon' => '', 'menuItems' => []];
             if (is_string($menuDef[3]) && strlen($menuDef[3]) > 0) {
                 $newPanel['icon'] = $menuDef[3];
@@ -205,11 +208,7 @@ class HomeMenu {
                 ];
             }
             $newPanel['largeRowSpacerCount'] = $maxAnchorsPerLargeRow - count($subItems) + $notAllowedSubItems;
-            $newPanel['mediumRowSpacerCount'] = 0;
-            if ($panelNbr%$colMedium === 0) {
-                $maxAnchorsPerMediumRow = max(array_slice($l2MenuCount, $panelNbr, $colMedium));
-                $newPanel['mediumRowSpacerCount'] = $maxAnchorsPerMediumRow - count($subItems);
-            }
+            $newPanel['mediumRowSpacerCount'] = $maxAnchorsPerMediumRow - count($subItems) + $notAllowedSubItems;
             $newRowPanels[] = $newPanel;
             $panelNbr++;
         }
